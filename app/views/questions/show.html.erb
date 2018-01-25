@@ -1,0 +1,57 @@
+<div class="form wide-form">
+  <p id="notice"><%= notice %></p>
+
+  <p>
+    <strong>Question str:</strong>
+    <%= @question.question_str %>
+  </p>
+
+  <p>
+    <strong>Opt1:</strong>
+    <%= @question.opt1 %>
+  </p>
+
+  <p>
+    <strong>Marks1:</strong>
+    <%= @question.marks1 %>
+  </p>
+
+  <% unless @question.opt2.empty? %>
+  <p>
+    <strong>Opt2:</strong>
+    <%= @question.opt2 %>
+  </p>
+
+  <p>
+    <strong>Marks2:</strong>
+    <%= @question.marks2 %>
+  </p>
+  <% end %>
+
+  <% unless @question.opt3.empty? %>
+  <p>
+    <strong>Opt3:</strong>
+    <%= @question.opt3 %>
+  </p>
+
+  <p>
+    <strong>Marks3:</strong>
+    <%= @question.marks3 %>
+  </p>
+  <% end %>
+
+  <% unless @question.opt4.empty? %>
+  <p>
+    <strong>Opt4:</strong>
+    <%= @question.opt4 %>
+  </p>
+
+  <p>
+    <strong>Marks4:</strong>
+    <%= @question.marks4 %>
+  </p>
+  <% end %>
+
+  <%= link_to 'Edit', edit_question_path(@question) %> |
+  <%= link_to 'Back', questions_path %>
+</div>

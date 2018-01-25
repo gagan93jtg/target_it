@@ -1,0 +1,19 @@
+default: &default
+  adapter: mysql2
+  pool: 5
+  timeout: 5000
+  database: rails_devise_dev
+  username: "root"
+  password: "root"
+
+development:
+  <<: *default
+  database: rails_devise_dev
+
+staging:
+  <<: *default
+  database: rails_devise_stage
+
+test:
+  <<: *default
+  database: rails_devise_test

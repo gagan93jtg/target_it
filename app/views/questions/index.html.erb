@@ -1,0 +1,39 @@
+<div class="container">
+  <p id="notice"><%= notice %></p>
+  <table class="table table-bordered table-striped mt-5 mb-5">
+    <thead>
+      <tr>
+        <th class="text-dark">Question</th>
+        <th class="text-dark">Opt1</th>
+        <th class="text-dark">Marks1</th>
+        <th class="text-dark">Opt2</th>
+        <th class="text-dark">Marks2</th>
+        <th class="text-dark">Opt3</th>
+        <th class="text-dark">Marks3</th>
+        <th class="text-dark">Opt4</th>
+        <th class="text-dark">Marks4</th>
+        <th class="text-dark" colspan="2">Actions</th>
+      </tr>
+    </thead>
+
+    <tbody>
+      <% @questions.each do |question| %>
+        <tr>
+          <td><%= question.question_str %></td>
+          <td><%= question.opt1 %></td>
+          <td><%= question.marks1 %></td>
+          <td><%= question.opt2 %></td>
+          <td><%= question.marks2 %></td>
+          <td><%= question.opt3 %></td>
+          <td><%= question.marks3 %></td>
+          <td><%= question.opt4 %></td>
+          <td><%= question.marks4 %></td>
+          <td><%= link_to 'Edit', edit_question_path(question) %></td>
+          <td><%= link_to 'Destroy', question, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+        </tr>
+      <% end %>
+    </tbody>
+  </table>
+  <%= link_to 'New Question', new_question_path, class: 'btn btn-outline-primary' %>
+
+</div>

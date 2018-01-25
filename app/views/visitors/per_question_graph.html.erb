@@ -1,0 +1,39 @@
+<% index = 0%>
+<div class="form wide-form">
+  <% @responses.each do |k, v|
+  @data_arr = []
+  v.each do |val|
+    @data_arr << {label: val[:date].to_date.inspect, value: val[:marks]}
+  end
+  @charts[index].dataSource = {
+    chart: {
+      caption: v[0][:str],
+      xAxisname: "Time",
+      yAxisName: "Percentage",
+      numberSuffix: " pts",
+      bgColor: "#ffffff",
+      borderAlpha: "20",
+      canvasBorderAlpha: "0",
+      usePlotGradientColor: "0",
+      plotBorderAlpha: "10",
+      placevaluesInside: "1",
+      rotatevalues: "1",
+      valueFontColor: "#ffffff",
+      showXAxisLine: "1",
+      xAxisLineColor: "#999999",
+      divlineColor: "#999999",
+      divLineDashed: "1",
+      showAlternateHGridColor: "0",
+      subcaptionFontBold: "0",
+      subcaptionFontSize: "14",
+      theme: "ocean",
+      exportEnabled: "1",
+    },
+    data: @data_arr
+  } %>
+  <div id="q<%=k%>_chart" class="m-4 d-inline-block">
+    <%= @charts[index].render() %>
+  </div>
+  <% index += 1 %>
+  <% end %>
+</div>

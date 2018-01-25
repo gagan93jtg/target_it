@@ -1,0 +1,36 @@
+<div class="form medium-form">
+  <h4 class="ml-3 mb-4">Details for <%= Time.at(@day_timestamp).to_date.inspect %></h4>
+  <% @responses.each do |response| %>
+  <% question = response.question %>
+  <% max_marks = question.max_marks %>
+  <% percentage = (response.marks_received * 100 / max_marks.to_f).round(2) %>
+  <div class="card z-depth-1 m-3 response-card">
+    <% if percentage >= 80.0 %>
+    <div class="bg-success p-2 text-light">
+      <p class="m-2"><%= question.question_str %> (<%= response.marks_received %>/<%= max_marks %> marks | <%= percentage %>%)</p>
+      <p class="m-0 ml-3 mb-2 font-weight-bold"><%= question.get_opt_by_marks(response.marks_received) %> </p>
+    </div>
+    <% elsif percentage >= 60.0 %>
+    <div class="bg-primary p-2 text-light">
+      <p class="m-2"><%= question.question_str %> (<%= response.marks_received %>/<%= max_marks %> marks | <%= percentage %>%)</p>
+      <p class="m-0 ml-3 mb-2 font-weight-bold"><%= question.get_opt_by_marks(response.marks_received) %> </p>
+    </div>
+    <% elsif percentage >= 50.0 %>
+    <div class="bg-info p-2 text-light">
+      <p class="m-2"><%= question.question_str %> (<%= response.marks_received %>/<%= max_marks %> marks | <%= percentage %>%)</p>
+      <p class="m-0 ml-3 mb-2 font-weight-bold"><%= question.get_opt_by_marks(response.marks_received) %> </p>
+    </div>
+    <% elsif percentage >= 35.0 %>
+    <div class="bg-warning p-2 text-dark">
+      <p class="m-2"><%= question.question_str %> (<%= response.marks_received %>/<%= max_marks %> marks | <%= percentage %>%)</p>
+      <p class="m-0 ml-3 mb-2 font-weight-bold"><%= question.get_opt_by_marks(response.marks_received) %> </p>
+    </div>
+    <% elsif percentage < 35.0 %>
+    <div class="bg-danger p-2 text-light">
+      <p class="m-2"><%= question.question_str %> (<%= response.marks_received %>/<%= max_marks %> marks | <%= percentage %>%)</p>
+      <p class="m-0 ml-3 mb-2 font-weight-bold"><%= question.get_opt_by_marks(response.marks_received) %> </p>
+    </div>
+    <% end %>
+  </div>
+  <% end %>
+</div>

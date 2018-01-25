@@ -1,0 +1,27 @@
+<div class="form small-form">
+  <%= form_tag("/tests", method: "post") do %>
+  <% @questions.each do |question| %>
+  <div class="form-group form-margins">
+    <label for="question<%= question.id %>"><%= question.question_str%></label>
+    <select class="form-control" id="question<%= question.id %>" name="question<%= question.id %>" >
+      <option value="1" name="1"><%= question.opt1%> </option>
+      <% unless question.opt2.empty? %>
+        <option value="2" name="2"><%= question.opt2%> </option>
+
+      <% end %>
+
+      <% unless question.opt3.empty? %>
+        <option value="3" name="3"><%= question.opt3%> </option>
+      <% end %>
+
+      <% unless question.opt4.empty? %>
+        <option value="4" name="4"><%= question.opt4%> </option>
+      <% end %>
+    </select>
+  </div>
+  <% end %>
+  <div class="actions">
+    <input type="submit" name="commit" value="Submit" class="btn btn-outline-primary" data-disable-with="Submitting">
+  </div>
+  <% end %>
+</div>

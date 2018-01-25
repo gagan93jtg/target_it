@@ -1,0 +1,72 @@
+<% @marks_arr = [] %>
+<div class="form wide-form">
+  <% if @responses.empty? %>
+  <p class="text-center text-dark">No data to display. Please take a test</p>
+  <% else %>
+  <% @responses.each do |response| %>
+  <% marks = response.last.sum{|h| h[:marks]} %>
+  <% total_marks = get_total_marks(@max_marks, response.last.map{|h| h[:question]}) %>
+  <% percentage = (marks * 100 / total_marks.to_f).round(2) %>
+
+  <% @marks_arr << {label: Time.at(response.first).to_date.to_s, value: marks} %>
+
+  <div class="card d-inline-block ml-4 mr-3 mb-4 mt-3" style="width: 20rem;">
+    <div class="card-img-top">
+      <span class="date-style"><%= Time.at(response.first).to_date.inspect %></span>
+    </div>
+    <div class="card-body">
+      <h4 class="card-title text-center">
+        Score: <%= marks %>/<%= total_marks%>
+      </h4>
+      <p class="card-text">
+        <% if percentage >= 80.0 %>
+        <div class="text-center bg-success p-2 font-weight-bold text-light">Excellent performance: <%= percentage%>%</div>
+        <% elsif percentage >= 60.0 %>
+        <div class="text-center bg-primary p-2 font-weight-bold text-light">Good performance: <%= percentage%>%</div>
+        <% elsif percentage >= 50.0 %>
+        <div class="text-center bg-info p-2 font-weight-bold text-light">Fair performance: <%= percentage%>%</div>
+        <% elsif percentage >= 35.0 %>
+        <div class="text-center bg-warning p-2 font-weight-bold text-dark">Below Average Performance : <%= percentage%>%</div>
+        <% elsif percentage < 35.0 %>
+        <div class="text-center bg-danger p-2 font-weight-bold text-light">Poorest performance: <%= percentage%>%</div>
+        <% end %>
+      </p>
+      <a href="visitors/<%= response.first %>" class="btn btn-outline-info float-right d-inline-block mb-4">Details</a>
+    </div>
+  </div>
+  <% end %>
+  <% end %>
+  <a href="visitors/per_question_graph" class="btn btn-outline-info ml-4 d-block">View per question performance</a>
+</div>
+
+<%
+@chart.dataSource = {
+  chart: {
+    caption: "Last 1 month percentage performance",
+    xAxisname: "Time",
+    yAxisName: "Percentage",
+    numberSuffix: " %",
+    bgColor: "#ffffff",
+    borderAlpha: "20",
+    canvasBorderAlpha: "0",
+    usePlotGradientColor: "0",
+    plotBorderAlpha: "10",
+    placevaluesInside: "1",
+    rotatevalues: "1",
+    valueFontColor: "#ffffff",
+    showXAxisLine: "1",
+    xAxisLineColor: "#999999",
+    divlineColor: "#999999",
+    divLineDashed: "1",
+    showAlternateHGridColor: "0",
+    subcaptionFontBold: "0",
+    subcaptionFontSize: "14",
+    theme: "ocean",
+    exportEnabled: "1",
+  },
+  data: @marks_arr
+}
+%>
+<div id="chartContainer" class="form wide-form">
+  <%= @chart.render() %>
+</div>

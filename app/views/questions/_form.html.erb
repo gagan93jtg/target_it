@@ -1,0 +1,62 @@
+  <%= form_for(question) do |f| %>
+  <% if question.errors.any? %>
+  <div id="error_explanation">
+    <h2><%= pluralize(question.errors.count, "error") %> prohibited this question from being saved:</h2>
+
+    <ul>
+      <% question.errors.full_messages.each do |message| %>
+      <li><%= message %></li>
+      <% end %>
+    </ul>
+  </div>
+  <% end %>
+
+  <div class="field form-group">
+    <%= f.label :question_str%>
+    <%= f.text_field :question_str, class: 'form-control' %>
+  </div>
+
+  <div class="field form-group">
+    <%= f.label :opt1 %>
+    <%= f.text_field :opt1, class: 'form-control'  %>
+  </div>
+
+  <div class="field form-group">
+    <%= f.label :marks1 %>
+    <%= f.number_field :marks1, class: 'form-control'  %>
+  </div>
+
+  <div class="field form-group">
+    <%= f.label :opt2 %>
+    <%= f.text_field :opt2, class: 'form-control'  %>
+  </div>
+
+  <div class="field form-group">
+    <%= f.label :marks2 %>
+    <%= f.number_field :marks2, class: 'form-control'  %>
+  </div>
+
+  <div class="field form-group">
+    <%= f.label :opt3 %>
+    <%= f.text_field :opt3, class: 'form-control'  %>
+  </div>
+
+  <div class="field form-group">
+    <%= f.label :marks3 %>
+    <%= f.number_field :marks3, class: 'form-control'  %>
+  </div>
+
+  <div class="field form-group">
+    <%= f.label :opt4 %>
+    <%= f.text_field :opt4, class: 'form-control'  %>
+  </div>
+
+  <div class="field form-group">
+    <%= f.label :marks4 %>
+    <%= f.number_field :marks4, class: 'form-control'  %>
+  </div>
+
+  <div class="actions">
+    <%= f.submit 'Save', class: 'btn btn-outline-primary'  %>
+  </div>
+  <% end %>
